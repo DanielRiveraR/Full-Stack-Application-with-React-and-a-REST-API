@@ -1,13 +1,17 @@
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
+class App extends Component {
+  render () {
+    return (
+    <div>
+    <Link component={course}>
 
-const routes = () => (
-  <Router>
-    <Header />
-    <main>
-      <Switch>
-        <Route exact path="/" component={mainPage} />
-      </Switch>
-    </main>
-  </Router>
-)
+    </Link>
+      
+    </div>
+    );
+  }
+}
+
+export default App;
