@@ -9,7 +9,7 @@ const CorseDetail = (props) => {
     const {actions} = useContext(appContext)
     const history = useHistory();
 
-    let id= props.match.params.id
+    let id = props.match.params.id
 
     useEffect( () => {
         const getCourse = async () => {
@@ -28,6 +28,33 @@ const CorseDetail = (props) => {
         }
         getCourse();
     }, [actions, history, id]);
+
+
+    function checkAuthUser() {
+        try {
+            if (actions.authUser) {
+                if (actions.authUser.id === course.Creator.id) {
+                    return true;
+                } else {
+                    return false;
+                    } 
+                } else {
+                    return false;
+                }
+            } catch (error) {
+                console.log("Test")
+                return false;
+            }
+        }
+
+
+        const deleteCourse = async() => {
+            await actions.deleteCourse(id, actions.authUser.emailAddress, actions.authUser.password)
+            setTimeout(() => {
+                history.push('/');
+            }, 500);
+        };
+
 
 
     return (
@@ -70,7 +97,7 @@ const CorseDetail = (props) => {
                             </div>
                         </form>
                     )
-            }
+                }
         </div>
     )
 }
