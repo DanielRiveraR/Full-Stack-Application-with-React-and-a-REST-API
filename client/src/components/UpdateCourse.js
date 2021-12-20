@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { appContext } from '../Context';
 import { useHistory } from 'react-router-dom';
 
-const UpdateCourse = () => {
+const UpdateCourse = (props) => {
     let identifier = props.match.params.id;
 
     const [title, setTitle] = useState('');
@@ -10,7 +10,7 @@ const UpdateCourse = () => {
     const [time, setTime] = useState('');
     const [materials, setMaterials] = useState('');
     const [errors, setErrors] = useState([]);
-    const [id, setId] = useState('');
+    const [id, setId] = useState(null);
     const [loading, setLoading] = useState(true);
     const [course, setCourse] = useState({});
 
@@ -98,7 +98,7 @@ const UpdateCourse = () => {
     return (
         <main> 
             {
-                Loading
+                loading
                 ? <h1>Loading...</h1>
                 :   (
                     <div className="wrap"> 

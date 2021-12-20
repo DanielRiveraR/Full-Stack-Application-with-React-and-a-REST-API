@@ -2,7 +2,6 @@ import { useState, useContext } from "react";
 import {appContext} from '../Context';
 import { Link, useHistory } from "react-router-dom";
 import ValidationError from './ValidationError';
-import UserSignIn from "./UserSignIn";
 
 const UserSignUp = () => {
 

@@ -1,13 +1,13 @@
 import React, {useState, useContext} from 'react';
 import { Link, useHistory } from 'react-router-dom'; 
-import { useContext } from '../Context';
+import { appContext } from '../Context';
 
 const UserSignIn = () => {
 
     let [email, setEmail] = useState('');
     let [password, setPassword] = useState('');
     let [fail, setFail] = useState(false);
-    const {actions} = useContext(appcontext);
+    const {actions} = useContext(appContext);
 
     const history =useHistory();
 
@@ -50,7 +50,7 @@ const UserSignIn = () => {
                 <label htmlFor="emailAddress">Email Address</label>
                 <input onChange={handleChange} id="emailAddress" name="emailAddress" type="email" value={email} />
 
-                <label htmlFor="passwor">Password</label>
+                <label htmlFor="password">Password</label>
                 <input onChange={handleChange} id="password" name="password" type="password" value={password} />
 
                 <button className="button" type="submit">Sign In</button>

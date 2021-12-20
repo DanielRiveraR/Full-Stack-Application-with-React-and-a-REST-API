@@ -1,12 +1,14 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {appContext} from '..Context';
+import {appContext} from '../Context';
 import { Link, useHistory } from 'react-router-dom';
+import AdminButtons from './AdminButtons';
+import ReactMarkdown from 'react-markdown';
 
 const CorseDetail = (props) => {
     let [course, setCourse] = useState([]);
     let [loading, setLoading] = useState(true);
 
-    const {actions} = useContext(appContext)
+    const {actions} = useContext(appContext);
     const history = useHistory();
 
     let id = props.match.params.id

@@ -11,6 +11,7 @@ const CreateCourse = () => {
 
     const { actions } = useContext(appContext);
     const history = useHistory();
+    
     const routeChange = () => {
         history.push('/');
     }
@@ -41,7 +42,7 @@ const CreateCourse = () => {
             .then(response => {
                 if (response.status === 201) {
                     setTimeout(() => {
-                        routerChange()
+                        routeChange()
                     }, 500)
                 } else if (response.status === 400) {
                     response.json().then(data => setErrors([data]))
@@ -50,11 +51,6 @@ const CreateCourse = () => {
             .catch(error => {
                 history.push('/error')
             })
-    }
-
-
-    function routerChange() {
-        history.push('/')
     }
 
 
@@ -102,7 +98,7 @@ const CreateCourse = () => {
                     </div>
                 </div>
                 <button className="button" type="submit">Create Course</button>
-                <button onClick={routerChange} className="button button-secondary">Cancel</button>
+                <button onClick={routeChange} className="button button-secondary">Cancel</button>
             </form>
         </div>
     )
