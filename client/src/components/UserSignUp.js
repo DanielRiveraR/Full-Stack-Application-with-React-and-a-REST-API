@@ -87,7 +87,7 @@ const UserSignUp = () => {
             </form>
             <Link to="/signin">Already have a user account? Click here to sign in!</Link>
         </div>
-    )
+    );
 
 }    
 

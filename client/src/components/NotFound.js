@@ -13,7 +13,7 @@ const NotFound = () => {
             <p>Sorry! We couldn't find the course you were looking for.</p>
             <Link className="button button-secondary" onClick={manageRoute} >Back to home</Link>
         </div>
-    )
+    );
 }
 
 export default NotFound;

@@ -4,7 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 import AdminButtons from './AdminButtons';
 import ReactMarkdown from 'react-markdown';
 
-const CorseDetail = (props) => {
+const CourseDetail = (props) => {
     let [course, setCourse] = useState([]);
     let [loading, setLoading] = useState(true);
 
@@ -35,7 +35,7 @@ const CorseDetail = (props) => {
     function checkAuthUser() {
         try {
             if (actions.authUser) {
-                if (actions.authUser.id === course.Creator.id) {
+                if (actions.authUser.id === course.Owner.id) {
                     return true;
                 } else {
                     return false;
@@ -44,7 +44,7 @@ const CorseDetail = (props) => {
                     return false;
                 }
             } catch (error) {
-                console.log("Test")
+                console.log("TEST")
                 return false;
             }
         }
@@ -84,7 +84,7 @@ const CorseDetail = (props) => {
                                 <div>
                                     <h3 className="course--detail--title">Estimated Time</h3>
                                     <h4 className="course--name">{course.title}</h4>
-                                    <p>By {course.Creator.firstName} {course.Creator.lastName}</p>
+                                    <p>By {course.Owner.firstName} {course.Owner.lastName}</p>
                                     <ReactMarkdown>{course.description}</ReactMarkdown>
                                     <p></p>
                                 </div>
@@ -93,7 +93,7 @@ const CorseDetail = (props) => {
                                     <p>{course.estimatedTime || 'No time provided'}</p>
                                     <h3 className="course--detail--title">Materias Needed</h3>
                                     <ul className="course--detail--list">
-                                        <ReactMarkdown>{course.materialsNeeded || '*Nothing!'}</ReactMarkdown>
+                                        <ReactMarkdown>{course.materialsNeeded || '* Nothing!'}</ReactMarkdown>
                                     </ul>
                                 </div>
                             </div>
@@ -101,7 +101,7 @@ const CorseDetail = (props) => {
                     )
                 }
         </div>
-    )
+    );
 }
 
-export default CorseDetail;
+export default CourseDetail;

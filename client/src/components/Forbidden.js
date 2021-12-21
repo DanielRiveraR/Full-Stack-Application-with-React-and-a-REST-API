@@ -13,7 +13,7 @@ const Forbidden = () => {
             <p>Oh no! You can't access this page.</p>
             <button onClick={routeChange} className="button button-secondary">Return Home</button>
         </div>
-    )
+    );
 } 
 
 

@@ -46,7 +46,7 @@ const UserSignIn = () => {
             }
 
             <h2>Sign In</h2>
-            <form>
+            <form onSubmit={handleSubmit} >
                 <label htmlFor="emailAddress">Email Address</label>
                 <input onChange={handleChange} id="emailAddress" name="emailAddress" type="email" value={email} />
 
@@ -58,7 +58,7 @@ const UserSignIn = () => {
             </form>
             <Link to="/signup">Don't have a account? Click here to sign up </Link>
         </div>
-    )
+    );
 
 }
 

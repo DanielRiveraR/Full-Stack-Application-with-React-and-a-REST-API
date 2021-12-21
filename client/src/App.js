@@ -16,7 +16,7 @@ import NotFound from './components/NotFound';
 
 
 
-const routes = () => {
+const routes = () => (
   <Router>
     <Header />
     <main>
@@ -35,6 +35,6 @@ const routes = () => {
       </Switch>
     </main>
   </Router>
-}
+)
 
 export default routes;

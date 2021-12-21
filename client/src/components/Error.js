@@ -14,7 +14,7 @@ const ErrorPage = () => {
                 <button className="button button-secondary" onClick={routeChange}>Home</button>
             </div>
         </main>
-    )
+    );
 }
 
 export default ErrorPage;

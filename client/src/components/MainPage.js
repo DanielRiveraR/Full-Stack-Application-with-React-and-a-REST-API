@@ -20,7 +20,7 @@ const MainPage = () => {
             })
         }
         getCourses();
-    }, [actions, history]);
+    }, [history, actions]);
 
 
 
@@ -39,7 +39,7 @@ const MainPage = () => {
                 </span>
            </Link>
         </div>
-    )
+    );
 }
 
 export default MainPage;

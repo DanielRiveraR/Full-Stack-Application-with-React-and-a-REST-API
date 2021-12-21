@@ -101,7 +101,7 @@ const CreateCourse = () => {
                 <button onClick={routeChange} className="button button-secondary">Cancel</button>
             </form>
         </div>
-    )
+    );
 }
 
 

@@ -12,7 +12,7 @@ const ValidationError = (props) => {
                 }
             </ul>
         </div>
-    )
+    );
 }
 
 export default ValidationError;
