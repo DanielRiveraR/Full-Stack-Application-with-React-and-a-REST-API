@@ -4,6 +4,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const routes = require('./routes');
+const cors = require('cors');
 
 const { sequelize} = require('./models');
 
@@ -16,6 +17,8 @@ const app = express();
 // setup morgan which gives us http request logging
 app.use(morgan('dev'));
 app.use(express.json());
+
+app.use(cors());
 
 // setup a friendly greeting for the root route
 app.get('/', (req, res) => {
