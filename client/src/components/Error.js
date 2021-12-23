@@ -1,7 +1,9 @@
 import { useHistory } from "react-router-dom";
 
 const ErrorPage = () => {
+    
     const history = useHistory();
+
     function routeChange() {
         history.push('/');
     }

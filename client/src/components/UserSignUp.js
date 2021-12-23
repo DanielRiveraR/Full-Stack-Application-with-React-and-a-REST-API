@@ -50,8 +50,9 @@ const UserSignUp = () => {
                     history.push('/error');
                 }
             })
-            .catch(error => {
-                history.push('/error')
+            .catch( error => {
+                console.log(error);
+                history.push('/error');
             })
     }
 
@@ -66,24 +67,24 @@ const UserSignUp = () => {
             <h2>Sign Up</h2>
             {
                 (errors.length !== 0)
-                ? errors.map((errors, index) => <ValidationError key={index} data={errors} />)
+                ? errors.map((error, index) => <ValidationError key={index} data={error} />)
                 : <h1> </h1>
             }
             <form onSubmit={handleSubmit}>
-            <label htmlFor="firstName">First Name</label>
-            <input onChange={handleChange} id="firstName" name="firstName" type="text" value={firstName} />
+                <label htmlFor="firstName">First Name</label>
+                <input onChange={handleChange} id="firstName" name="firstName" type="text" value={firstName} />
 
-            <label htmlFor="lastName">Last Name</label>
-            <input onChange={handleChange} id="lastName" name="lastName" type="text" value={lastName} />
+                <label htmlFor="lastName">Last Name</label>
+                <input onChange={handleChange} id="lastName" name="lastName" type="text" value={lastName} />
 
-            <label htmlFor="emailAddress">Email Address</label>
-            <input onChange={handleChange} id="emailAddress" name="emailAddress" type="email" value={email} />
+                <label htmlFor="emailAddress">Email Address</label>
+                <input onChange={handleChange} id="emailAddress" name="emailAddress" type="email" value={email} />
 
-            <label htmlFor="password">Password</label>
-            <input onChange={handleChange} id="password" name="password" type="password" value={password} />
+                <label htmlFor="password">Password</label>
+                <input onChange={handleChange} id="password" name="password" type="password" value={password} />
 
-            <button className="button" type="submit">Sign Up</button>
-            <button onClick={routerChange} className="button button-secondary">Cancel</button>
+                <button className="button" type="submit">Sign Up</button>
+                <button onClick={routerChange} className="button button-secondary">Cancel</button>
             </form>
             <Link to="/signin">Already have a user account? Click here to sign in!</Link>
         </div>

@@ -9,7 +9,7 @@ export const Provider = (props) => {
 
     const [authUser, setAuthUser] = useState(cookie ? JSON.parse(cookie) : null);
 
-    const api = (path, method = 'GET', body = null, requiresAuth = false, credentials= null) => {
+    const api = (path, method = 'GET', body = null, requiresAuth = false, credentials = null) => {
         const url = appSettings.apiBaseUrl + path;
         const options = {
             method,
@@ -25,21 +25,21 @@ export const Provider = (props) => {
 
         if (requiresAuth) {
             const encodedCredentials = btoa(`${credentials.username}:${credentials.password}`);
-            options.headers['Authorization'] = `Basic ${encodedCredentials}`
+            options.headers['Authorization'] = `Basic ${encodedCredentials}`;
         }
 
         return fetch(url, options)
-        .then(response => response)
+            .then(response => response)
     }
 
 
     const getUser = async(username, password) => {
-        const response = api('/users', 'GET', null, true, {username, password})
+        const response = await api(`/users`, 'GET', null, true, {username, password});
         return response;
     }
 
     const getCourses = async() => {
-        const response = await api('/courses')
+        const response = await api('/courses');
         return response;
     }
 
@@ -49,12 +49,12 @@ export const Provider = (props) => {
     }
 
     const createCourse = async(course, username, password) => {
-        const response = api('/courses', 'POST', course, true, {username, password})
+        const response = api('/courses', 'POST', course, true, {username, password});
         return response;
     }
 
     const updateCourse = async(id, body, username, password) => {
-        const response = api(`/courses/${id}`, 'PUT', body, true, {username, password})
+        const response = api(`/courses/${id}`, 'PUT', body, true, {username, password});
         return response;
     }
 
@@ -70,10 +70,10 @@ export const Provider = (props) => {
                     Cookies.set('authenticatedUser', JSON.stringify(user), {expires: 1})
                 })
         }
-        return response
+        return response;
     }
 
-    const signUp = (user) => {
+    const signUp = async(user) => {
         const response = api('/users', 'POST', user);
         return response;
     }
@@ -84,7 +84,7 @@ export const Provider = (props) => {
     }
 
     const deleteCourse = (id, username, password) => {
-        api(`/courses/${id}`, 'DELETE', null, true, {username, password});
+        api(`/courses/${id}`, 'DELETE', null, true, {username, password})
     }
 
     return (
@@ -100,8 +100,7 @@ export const Provider = (props) => {
             createCourse,
             updateCourse
         }}}>
-            {props.children}
+          {props.children}
         </appContext.Provider>
     );
-
 }

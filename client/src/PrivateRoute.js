@@ -12,6 +12,6 @@ const PrivateRoute = ( {component: Component, ...rest}) => {
             }
         </div>
     )
-}
+};
 
 export default PrivateRoute;

@@ -5,11 +5,11 @@ const ValidationError = (props) => {
         <div className="validation--errors">
             <h3>Validation Errors</h3>
             <ul>
-                {
-                    errors[0][0].errors.map((errors, index => {
-                        <li key={index}>{`${errors[0][0].errors[index]}`}</li>
-                    }))
-                }
+            {
+                errors[0][0].errors.map((error, index) => (
+                    <li key={index}>{`${errors[0][0].errors[index]}`}</li>
+                ))
+            }
             </ul>
         </div>
     );
