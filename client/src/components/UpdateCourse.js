@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { appContext } from '../Context';
 import { useHistory } from 'react-router-dom';
+import ValidationError from "./ValidationError";
 
 const UpdateCourse = (props) => {
     let identifier = props.match.params.id;
@@ -12,7 +13,6 @@ const UpdateCourse = (props) => {
     const [materials, setMaterials] = useState('');
     const [errors, setErrors] = useState([]);
     const [id, setId] = useState(null);
-    const [loading, setLoading] = useState(true);
     const [course, setCourse] = useState({});
 
     
@@ -21,7 +21,7 @@ const UpdateCourse = (props) => {
         history.push(`/courses/${id}`);
     }
 
-
+   //This hook render the selected course
     useEffect( () => {
         const getCourse = async() => {
             await actions.getCourse(identifier)
@@ -40,7 +40,7 @@ const UpdateCourse = (props) => {
                         setId(course.id);
                         return course;
                     })
-                    .then(setLoading(false))
+                    
                 } else {
                     history.push('/error')
                 }
@@ -51,6 +51,8 @@ const UpdateCourse = (props) => {
 
     }, [actions, history, identifier])
 
+
+    //This function updates the state of the element when user inputs text.
     const onChange = (e) => {
         e.preventDefault();
         if (e.target.name === 'courseTitle') {
@@ -64,7 +66,7 @@ const UpdateCourse = (props) => {
         }
     }
 
-
+    //This function creates an object that holds the new data created by the user.
     const handleSubmit = async(e) => {
         e.preventDefault();
         let body = {
@@ -74,6 +76,7 @@ const UpdateCourse = (props) => {
             materialsNeeded: materials
         };
 
+        //This variable updates the course after submission and redirects users to detail's course screen. If there's a bad request a error message will thrown. 
         const response = actions.updateCourse(identifier, body, actions.authUser.emailAddress, actions.authUser.password)
             .then(response => {
                 if (response.status === 204) {
@@ -82,7 +85,7 @@ const UpdateCourse = (props) => {
                     }, 500)
                 } else if (response.status === 400) {
                     response.json().then(response => {
-                        setErrors(response);
+                        setErrors([response]);
                         console.log(course);
                         }) 
                     }
@@ -90,26 +93,21 @@ const UpdateCourse = (props) => {
                 console.log(response);
     }
 
+       
+    
+    //This conditional checks if there are any errors. If there are then throw a error message from the API backend.
 
     return (
         <main> 
-        {
-            loading
-            ? <h1>Loading...</h1>
-            :   (
-                <div className="wrap"> 
-                {
-                    (errors.length !== 0)
-                    ?   <div className="validations--errors">
-                        <h3>Validation Errors</h3>
-                        <ul>
-                            {errors.message}
-                        </ul>
-                    </div>
-                    : null
-                }
+        
+        <div className="wrap"> 
 
             <h2>Update Course</h2>
+                {
+                    (errors.length !== 0)
+                    ? errors.map((error, index) => <ValidationError key={index} data={errors} />)
+                    : null
+                }
             <form onSubmit={handleSubmit}>
                 <div className="main--flex">
                     <div>
@@ -133,8 +131,8 @@ const UpdateCourse = (props) => {
                 <button onClick={routerChange} className="button button-secondary">Cancel</button>
             </form>
         </div>
-        )
-        }
+        
+        
         </main>
     );
 }

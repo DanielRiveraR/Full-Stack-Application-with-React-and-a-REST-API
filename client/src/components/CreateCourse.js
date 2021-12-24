@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { appContext } from '../Context';
 import { useHistory } from 'react-router-dom';
+import ValidationError from "./ValidationError";
 
 const CreateCourse = () => {
     const [title, setTitle] = useState('');
@@ -16,6 +17,8 @@ const CreateCourse = () => {
         history.push('/');
     }
 
+
+    //This function updates the state of the element when user inputs text.
     function handleChange(e) {
         if (e.target.name === 'courseTitle') {
             setTitle(e.target.value);
@@ -29,7 +32,8 @@ const CreateCourse = () => {
     }
 
 
-    function handleSubmit (e) {
+    //This function creates an object that holds the new data created by the user.
+    const handleSubmit = async(e) => {
         e.preventDefault();
         let body = {
             title: title,
@@ -38,6 +42,7 @@ const CreateCourse = () => {
             materialsNeeded: materials
         };
 
+        //This method updates the course after submission and redirects users to detail's course screen. If there's a bad request a error message will thrown. 
         actions.createCourse(body, actions.authUser.emailAddress, actions.authUser.password)
             .then(response => {
                 if (response.status === 201) {
@@ -45,7 +50,10 @@ const CreateCourse = () => {
                         routeChange()
                     }, 500)
                 } else if (response.status === 400) {
-                    response.json().then(data => setErrors([data]))
+                    response.json().then(data =>  {
+                    setErrors([data])
+                    console.log(data)
+                    })
                 } 
             })
             .catch(error => {
@@ -53,27 +61,15 @@ const CreateCourse = () => {
             })
     }
 
+    
+        //This conditional checks if there are any errors. If there are then throw a error message from the API backend.
 
     return (
         <div className="wrap">
             <h2>Create Course</h2>
             {
-                (errors.length > 0)
-                ? (
-                    <div className="validations--errors">
-                        <h3>Validation Errors</h3>
-                        <ul>
-                            {
-                                errors.map((errors, index) => { 
-                                    return (
-                                    <li key={index} data={errors}></li> 
-                                    )
-                                })
-                            }
-                        </ul>
-                    </div>
-                )
-                
+                (errors.length !== 0)
+                ? errors.map((error, index) => <ValidationError key={index} data={errors} />)
                 : null
             }
 
