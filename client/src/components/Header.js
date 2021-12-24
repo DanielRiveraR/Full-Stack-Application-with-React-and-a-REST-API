@@ -14,7 +14,7 @@ const Header = () => {
                     {
                         authUser
                         ? <ul className="header--signedout">
-                            <h1>{`Welcome ${authUser.firstName} ${authUser.lastName}`}</h1>
+                            <h1>{`Welcome ${authUser.firstName} ${authUser.lastName}!`}</h1>
                                 <Link to="/signout/">Sign Out</Link>
                         </ul>
 

@@ -27,8 +27,8 @@ const UserSignUp = () => {
     }
 
 
-    function handleSubmit(e) {
-        e.preventDefault();
+    function handleSubmit(event) {
+        event.preventDefault();
 
         const user = {
             firstName: firstName,
@@ -45,13 +45,17 @@ const UserSignUp = () => {
                     console.log(response)
                     history.push('/');
                 } else if (response.status === 400) {
-                    response.json().then(data => setErrors([data]))
+                    response.json().then(data => {
+                        setErrors([data]);
+                        console.log(data);
+                    })
+                    
                 } else {
                     history.push('/error');
                 }
             })
             .catch( error => {
-                console.log(error);
+                console.log(error.message);
                 history.push('/error');
             })
     }
@@ -67,7 +71,7 @@ const UserSignUp = () => {
             <h2>Sign Up</h2>
             {
                 (errors.length !== 0)
-                ? errors.map((error, index) => <ValidationError key={index} data={error} />)
+                ? errors.map((error, index) => <ValidationError key={index} data={errors} />)
                 : <h1> </h1>
             }
             <form onSubmit={handleSubmit}>
